@@ -104,11 +104,11 @@ loopback_interfaces:
   shutdown: false
   vrf: VRF11
   ip_address: 10.255.11.7/32
-- name: Loopback13
-  description: DIAG_VRF_VRF13
+- name: Loopback12
+  description: DIAG_VRF_VRF12
   shutdown: false
-  vrf: VRF13
-  ip_address: 10.255.13.7/32
+  vrf: VRF12
+  ip_address: 10.255.12.7/32
 management_api_http:
   enable_https: true
   enable_vrfs:
@@ -355,22 +355,22 @@ router_bgp:
       connected:
         enabled: true
         route_map: RM-CONN-2-BGP-VRFS
-  - name: VRF13
-    rd: 10.255.1.7:13
+  - name: VRF12
+    rd: 10.255.1.7:12
     route_targets:
       import:
       - address_family: evpn
         route_targets:
-        - '13:13'
+        - '12:12'
       export:
       - address_family: evpn
         route_targets:
-        - '13:13'
+        - '12:12'
     router_id: 10.255.1.7
     neighbors:
     - ip_address: 2001:db8:4:6::2
       peer_group: MLAG-IPv6-UNDERLAY-PEER
-      description: leaf08_Vlan3012
+      description: leaf08_Vlan3011
     redistribute:
       connected:
         enabled: true
@@ -392,8 +392,8 @@ virtual_source_nat_vrfs:
   ip_address: 10.255.10.7
 - name: VRF11
   ip_address: 10.255.11.7
-- name: VRF13
-  ip_address: 10.255.13.7
+- name: VRF12
+  ip_address: 10.255.12.7
 vlan_interfaces:
 - name: Vlan4093
   description: MLAG_L3
@@ -451,7 +451,7 @@ vlan_interfaces:
 - name: Vlan31
   description: VRF12_VLAN31
   shutdown: false
-  vrf: VRF13
+  vrf: VRF12
   ipv6_enable: true
   ipv6_address_virtuals:
   - 2001:DB8:31::1/48
@@ -459,15 +459,15 @@ vlan_interfaces:
 - name: Vlan32
   description: VRF12_VLAN32
   shutdown: false
-  vrf: VRF13
+  vrf: VRF12
   ipv6_enable: true
   ipv6_address_virtuals:
   - 2001:DB8:32::1/48
   tenant: TENANT1
-- name: Vlan3012
-  description: MLAG_L3_VRF_VRF13
+- name: Vlan3011
+  description: MLAG_L3_VRF_VRF12
   shutdown: false
-  vrf: VRF13
+  vrf: VRF12
   ipv6_address: 2001:db8:4:6::1/64
   mtu: 1500
   tenant: TENANT1
@@ -516,8 +516,8 @@ vlans:
 - id: 32
   name: VRF12_VLAN32
   tenant: TENANT1
-- id: 3012
-  name: MLAG_L3_VRF_VRF13
+- id: 3011
+  name: MLAG_L3_VRF_VRF12
   trunk_groups:
   - MLAG
   tenant: TENANT1
@@ -537,7 +537,7 @@ vrfs:
   ip_routing: true
   ipv6_routing: true
   tenant: TENANT1
-- name: VRF13
+- name: VRF12
   ip_routing: true
   ipv6_routing: true
   tenant: TENANT1
@@ -572,5 +572,5 @@ vxlan_interface:
         vni: 10
       - name: VRF11
         vni: 11
-      - name: VRF13
-        vni: 13
+      - name: VRF12
+        vni: 12

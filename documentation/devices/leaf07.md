@@ -278,7 +278,7 @@ vlan internal order ascending range 1006 1199
 | 32 | VRF12_VLAN32 | - |
 | 3009 | MLAG_L3_VRF_VRF10 | MLAG |
 | 3010 | MLAG_L3_VRF_VRF11 | MLAG |
-| 3012 | MLAG_L3_VRF_VRF13 | MLAG |
+| 3011 | MLAG_L3_VRF_VRF12 | MLAG |
 | 3401 | L2_VLAN3401 | - |
 | 3402 | L2_VLAN3402 | - |
 | 4093 | MLAG_L3 | MLAG |
@@ -314,8 +314,8 @@ vlan 3010
    name MLAG_L3_VRF_VRF11
    trunk group MLAG
 !
-vlan 3012
-   name MLAG_L3_VRF_VRF13
+vlan 3011
+   name MLAG_L3_VRF_VRF12
    trunk group MLAG
 !
 vlan 3401
@@ -418,7 +418,7 @@ interface Port-Channel5
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | - |
 | Loopback10 | DIAG_VRF_VRF10 | VRF10 | 10.255.10.7/32 |
 | Loopback11 | DIAG_VRF_VRF11 | VRF11 | 10.255.11.7/32 |
-| Loopback13 | DIAG_VRF_VRF13 | VRF13 | 10.255.13.7/32 |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 10.255.12.7/32 |
 
 ##### IPv6
 
@@ -428,7 +428,7 @@ interface Port-Channel5
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | 2001:db8:5:7::1/64 |
 | Loopback10 | DIAG_VRF_VRF10 | VRF10 | - |
 | Loopback11 | DIAG_VRF_VRF11 | VRF11 | - |
-| Loopback13 | DIAG_VRF_VRF13 | VRF13 | - |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | - |
 
 #### Loopback Interfaces Device Configuration
 
@@ -456,11 +456,11 @@ interface Loopback11
    vrf VRF11
    ip address 10.255.11.7/32
 !
-interface Loopback13
-   description DIAG_VRF_VRF13
+interface Loopback12
+   description DIAG_VRF_VRF12
    no shutdown
-   vrf VRF13
-   ip address 10.255.13.7/32
+   vrf VRF12
+   ip address 10.255.12.7/32
 ```
 
 ### VLAN Interfaces
@@ -473,11 +473,11 @@ interface Loopback13
 | Vlan12 | VRF10_VLAN12 | VRF10 | - | False |
 | Vlan21 | VRF11_VLAN21 | VRF11 | - | False |
 | Vlan22 | VRF11_VLAN22 | VRF11 | - | False |
-| Vlan31 | VRF12_VLAN31 | VRF13 | - | False |
-| Vlan32 | VRF12_VLAN32 | VRF13 | - | False |
+| Vlan31 | VRF12_VLAN31 | VRF12 | - | False |
+| Vlan32 | VRF12_VLAN32 | VRF12 | - | False |
 | Vlan3009 | MLAG_L3_VRF_VRF10 | VRF10 | 1500 | False |
 | Vlan3010 | MLAG_L3_VRF_VRF11 | VRF11 | 1500 | False |
-| Vlan3012 | MLAG_L3_VRF_VRF13 | VRF13 | 1500 | False |
+| Vlan3011 | MLAG_L3_VRF_VRF12 | VRF12 | 1500 | False |
 | Vlan4093 | MLAG_L3 | default | 1500 | False |
 | Vlan4094 | MLAG | default | 1500 | False |
 
@@ -489,11 +489,11 @@ interface Loopback13
 | Vlan12 |  VRF10  |  -  |  10.10.12.1/24  |  -  |  -  |  -  |
 | Vlan21 |  VRF11  |  -  |  -  |  -  |  -  |  -  |
 | Vlan22 |  VRF11  |  -  |  10.10.22.1/24  |  -  |  -  |  -  |
-| Vlan31 |  VRF13  |  -  |  -  |  -  |  -  |  -  |
-| Vlan32 |  VRF13  |  -  |  -  |  -  |  -  |  -  |
+| Vlan31 |  VRF12  |  -  |  -  |  -  |  -  |  -  |
+| Vlan32 |  VRF12  |  -  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  VRF10  |  -  |  -  |  -  |  -  |  -  |
 | Vlan3010 |  VRF11  |  -  |  -  |  -  |  -  |  -  |
-| Vlan3012 |  VRF13  |  -  |  -  |  -  |  -  |  -  |
+| Vlan3011 |  VRF12  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  -  |  -  |  -  |  -  |  -  |
 
@@ -502,11 +502,11 @@ interface Loopback13
 | Interface | VRF | IPv6 Address | IPv6 Virtual Addresses | Virtual Router Addresses | ND RA Disabled | Managed Config Flag | Other Config Flag | IPv6 ACL In | IPv6 ACL Out |
 | --------- | --- | ------------ | ---------------------- | ------------------------ | -------------- | ------------------- | ----------------- | ----------- | ------------ |
 | Vlan21 | VRF11 | - | 2001:DB8:21::1/48 | - | - | - | - | - | - |
-| Vlan31 | VRF13 | - | 2001:DB8:31::1/48 | - | - | - | - | - | - |
-| Vlan32 | VRF13 | - | 2001:DB8:32::1/48 | - | - | - | - | - | - |
+| Vlan31 | VRF12 | - | 2001:DB8:31::1/48 | - | - | - | - | - | - |
+| Vlan32 | VRF12 | - | 2001:DB8:32::1/48 | - | - | - | - | - | - |
 | Vlan3009 | VRF10 | 2001:db8:4:6::1/64 | - | - | - | - | - | - | - |
 | Vlan3010 | VRF11 | 2001:db8:4:6::1/64 | - | - | - | - | - | - | - |
-| Vlan3012 | VRF13 | 2001:db8:4:6::1/64 | - | - | - | - | - | - | - |
+| Vlan3011 | VRF12 | 2001:db8:4:6::1/64 | - | - | - | - | - | - | - |
 | Vlan4093 | default | 2001:db8:4:6::1/64 | - | - | - | - | - | - | - |
 | Vlan4094 | default | 2001:db8:3:6::1/64 | - | - | - | - | - | - | - |
 
@@ -542,14 +542,14 @@ interface Vlan22
 interface Vlan31
    description VRF12_VLAN31
    no shutdown
-   vrf VRF13
+   vrf VRF12
    ipv6 enable
    ipv6 address virtual 2001:DB8:31::1/48
 !
 interface Vlan32
    description VRF12_VLAN32
    no shutdown
-   vrf VRF13
+   vrf VRF12
    ipv6 enable
    ipv6 address virtual 2001:DB8:32::1/48
 !
@@ -567,11 +567,11 @@ interface Vlan3010
    vrf VRF11
    ipv6 address 2001:db8:4:6::1/64
 !
-interface Vlan3012
-   description MLAG_L3_VRF_VRF13
+interface Vlan3011
+   description MLAG_L3_VRF_VRF12
    no shutdown
    mtu 1500
-   vrf VRF13
+   vrf VRF12
    ipv6 address 2001:db8:4:6::1/64
 !
 interface Vlan4093
@@ -618,7 +618,7 @@ interface Vlan4094
 | --- | --- | ----------------------------------------- |
 | VRF10 | 10 | - |
 | VRF11 | 11 | - |
-| VRF13 | 13 | - |
+| VRF12 | 12 | - |
 
 #### VXLAN Interface Device Configuration
 
@@ -640,7 +640,7 @@ interface Vxlan1
    vxlan vlan 3402 vni 13402
    vxlan vrf VRF10 vni 10
    vxlan vrf VRF11 vni 11
-   vxlan vrf VRF13 vni 13
+   vxlan vrf VRF12 vni 12
 ```
 
 ## Routing
@@ -677,7 +677,7 @@ ip virtual-router mac-address 00:1c:73:00:00:99
 | MGMT | False |
 | VRF10 | True |
 | VRF11 | True |
-| VRF13 | True |
+| VRF12 | True |
 
 #### IP Routing Device Configuration
 
@@ -687,7 +687,7 @@ ip routing
 no ip routing vrf MGMT
 ip routing vrf VRF10
 ip routing vrf VRF11
-ip routing vrf VRF13
+ip routing vrf VRF12
 ```
 
 ### IPv6 Routing
@@ -700,7 +700,7 @@ ip routing vrf VRF13
 | MGMT | false |
 | VRF10 | false |
 | VRF11 | true |
-| VRF13 | true |
+| VRF12 | true |
 
 #### IPv6 Routing Device Configuration
 
@@ -708,7 +708,7 @@ ip routing vrf VRF13
 !
 ipv6 unicast-routing
 ipv6 unicast-routing vrf VRF11
-ipv6 unicast-routing vrf VRF13
+ipv6 unicast-routing vrf VRF12
 ```
 
 ### Static Routes
@@ -783,7 +783,7 @@ ASN Notation: asplain
 | 2001:db8:4:6::2 | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | default | - | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | - | - | - | - | - | - |
 | 2001:db8:4:6::2 | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | VRF10 | - | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | - | - | - | - | - | - |
 | 2001:db8:4:6::2 | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | VRF11 | - | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | - | - | - | - | - | - |
-| 2001:db8:4:6::2 | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | VRF13 | - | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | - | - | - | - | - | - |
+| 2001:db8:4:6::2 | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | VRF12 | - | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | Inherited from peer group MLAG-IPv6-UNDERLAY-PEER | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -812,7 +812,7 @@ ASN Notation: asplain
 | --- | ------------------- | ------------ | ---------------- |
 | VRF10 | 10.255.1.7:10 | connected | - |
 | VRF11 | 10.255.1.7:11 | connected | - |
-| VRF13 | 10.255.1.7:13 | connected | - |
+| VRF12 | 10.255.1.7:12 | connected | - |
 
 #### Router BGP Device Configuration
 
@@ -922,13 +922,13 @@ router bgp 65104
       neighbor 2001:db8:4:6::2 description leaf08_Vlan3010
       redistribute connected route-map RM-CONN-2-BGP-VRFS
    !
-   vrf VRF13
-      rd 10.255.1.7:13
-      route-target import evpn 13:13
-      route-target export evpn 13:13
+   vrf VRF12
+      rd 10.255.1.7:12
+      route-target import evpn 12:12
+      route-target export evpn 12:12
       router-id 10.255.1.7
       neighbor 2001:db8:4:6::2 peer group MLAG-IPv6-UNDERLAY-PEER
-      neighbor 2001:db8:4:6::2 description leaf08_Vlan3012
+      neighbor 2001:db8:4:6::2 description leaf08_Vlan3011
       redistribute connected route-map RM-CONN-2-BGP-VRFS
 ```
 
@@ -1045,7 +1045,7 @@ route-map RM-MLAG-PEER-IN permit 10
 | MGMT | disabled |
 | VRF10 | enabled |
 | VRF11 | enabled |
-| VRF13 | enabled |
+| VRF12 | enabled |
 
 ### VRF Instances Device Configuration
 
@@ -1057,7 +1057,7 @@ vrf instance VRF10
 !
 vrf instance VRF11
 !
-vrf instance VRF13
+vrf instance VRF12
 ```
 
 ## Virtual Source NAT
@@ -1068,7 +1068,7 @@ vrf instance VRF13
 | -------------- | ----------------------- | ----------------------- |
 | VRF10 | 10.255.10.7 | - |
 | VRF11 | 10.255.11.7 | - |
-| VRF13 | 10.255.13.7 | - |
+| VRF12 | 10.255.12.7 | - |
 
 ### Virtual Source NAT Configuration
 
@@ -1076,5 +1076,5 @@ vrf instance VRF13
 !
 ip address virtual source-nat vrf VRF10 address 10.255.10.7
 ip address virtual source-nat vrf VRF11 address 10.255.11.7
-ip address virtual source-nat vrf VRF13 address 10.255.13.7
+ip address virtual source-nat vrf VRF12 address 10.255.12.7
 ```

@@ -1,0 +1,42 @@
+---
+all:
+  children:
+    FABRIC:
+      children:
+        DC1:
+          children:
+            DC1_SPINES:
+              hosts:
+                spine01:
+                  ansible_host: 172.20.20.201
+                spine02:
+                  ansible_host: 172.20.20.202
+            DC1_L3_LEAVES:
+              hosts:
+                leaf01:
+                  ansible_host: 172.20.20.101
+                leaf02:
+                  ansible_host: 172.20.20.102
+                leaf03:
+                  ansible_host: 172.20.20.103
+                leaf04:
+                  ansible_host: 172.20.20.104
+                leaf05:
+                  ansible_host: 172.20.20.105
+                leaf06:
+                  ansible_host: 172.20.20.106
+                leaf07:
+                  ansible_host: 172.20.20.107
+                leaf08:
+                  ansible_host: 172.20.20.108
+            DC1_L2_LEAVES:
+              hosts:
+
+    NETWORK_SERVICES:
+      children:
+        DC1_L3_LEAVES:
+        DC1_L2_LEAVES:
+    CONNECTED_ENDPOINTS:
+      children:
+        DC1_L3_LEAVES:
+        DC1_L2_LEAVES:

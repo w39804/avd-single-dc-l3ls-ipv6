@@ -1,0 +1,45 @@
+! Startup-config last modified at Wed Dec 10 17:31:00 2025 by root
+! device: host03 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$Fy49MHbVdrEdJPzG$VNwRV26md52j2HEa8M03EElBLbOwAaH21CxgujApD5n1Zu5DOEScBmHPMsScnoZFFyzFF42QErD2dufmeQDLr1
+!
+management api http-commands
+   no shutdown
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname host03
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+!
+interface Ethernet2
+!
+interface Management0
+   ip address 172.20.20.113/24
+   ipv6 address 3fff:172:20:20::9/64
+!
+no ip routing
+!
+ip route 0.0.0.0/0 172.20.20.1
+!
+ipv6 route ::/0 3fff:172:20:20::1
+!
+end

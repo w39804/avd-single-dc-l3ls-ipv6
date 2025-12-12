@@ -52,6 +52,15 @@ ethernet_interfaces:
   peer_type: spine
   switchport:
     enabled: false
+- name: Ethernet4
+  description: SERVER_host04_Ethernet1
+  shutdown: false
+  channel_group:
+    id: 4
+    mode: active
+  peer: host04
+  peer_interface: Ethernet1
+  peer_type: server
 hostname: leaf07
 ip_domain_lookup:
   source_interfaces:
@@ -150,6 +159,17 @@ port_channel_interfaces:
     trunk:
       groups:
       - MLAG
+- name: Port-Channel4
+  description: SERVER_host04
+  shutdown: false
+  mlag: 4
+  spanning_tree_portfast: edge
+  switchport:
+    enabled: true
+    mode: trunk
+    trunk:
+      allowed_vlan: 11-12,21-22
+      native_vlan: 4092
 route_maps:
 - name: RM-MLAG-PEER-IN
   sequence_numbers:

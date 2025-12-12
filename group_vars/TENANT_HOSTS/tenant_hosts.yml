@@ -1,0 +1,48 @@
+---
+type: l2leaf
+#type: l3spine
+
+l2leaf:
+#l3spine:
+  defaults:
+    platform: cEOSLab
+    spanning_tree_mode: mstp
+#    router_id_pool: 10.255.0.0/24
+#    # Pool of IPv6 addresses to configure interface Loopback0 used for BGP EVPN sessions
+#    #loopback_ipv4_pool: 10.255.0.0/24
+#    loopback_ipv6_pool: 2001:DB8:0::/48
+
+  node_groups:
+  
+    - group: HOST01
+      uplink_switches: [leaf01, leaf02]
+      nodes:
+        - name: host01
+          id: 1
+          mgmt_ip: 172.20.20.111/24
+          uplink_switch_interfaces: [Ethernet4, Ethernet4]
+ 
+    - group: HOST02
+      uplink_switches: [leaf03, leaf04]
+      nodes:
+        - name: host02
+          id: 2
+          mgmt_ip: 172.20.20.112/24
+          uplink_switch_interfaces: [Ethernet4, Ethernet4]
+         
+    - group: HOST03
+      uplink_switches: [leaf05, leaf06]
+      nodes:
+        - name: host03
+          id: 1
+          mgmt_ip: 172.20.20.113/24
+          uplink_switch_interfaces: [Ethernet4, Ethernet4]
+  
+    - group: HOST04
+      uplink_switches: [leaf07, leaf08]
+      nodes:
+        - name: host04
+          id: 2
+          mgmt_ip: 172.20.20.114/24
+          uplink_switch_interfaces: [Ethernet4, Ethernet4]
+

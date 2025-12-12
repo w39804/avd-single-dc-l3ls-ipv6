@@ -1,4 +1,4 @@
-! Startup-config last modified at Wed Dec 10 19:28:51 2025 by ansible
+! Startup-config last modified at Fri Dec 12 16:05:53 2025 by ansible
 ! device: leaf06 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root
@@ -88,6 +88,14 @@ vrf instance VRF11
 !
 vrf instance VRF12
 !
+interface Port-Channel4
+   description SERVER_host03
+   switchport trunk native vlan 4092
+   switchport trunk allowed vlan 11-12,21-22
+   switchport mode trunk
+   mlag 4
+   spanning-tree portfast edge
+!
 interface Port-Channel5
    description MLAG_leaf05_Port-Channel5
    switchport mode trunk
@@ -106,9 +114,8 @@ interface Ethernet2
    ipv6 address 2001:db8:2:b::2/64
 !
 interface Ethernet4
-   description SERVER_dc1-leaf01-server1_iLO
-   switchport access vlan 11
-   spanning-tree portfast edge
+   description SERVER_host03_Ethernet2
+   channel-group 4 mode active
 !
 interface Ethernet5
    description MLAG_leaf05_Ethernet5

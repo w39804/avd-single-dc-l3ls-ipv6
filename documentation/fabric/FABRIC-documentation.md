@@ -17,6 +17,10 @@
 
 | POD | Type | Node | Management IP | Platform | Provisioned in CloudVision | Serial Number |
 | --- | ---- | ---- | ------------- | -------- | -------------------------- | ------------- |
+| FABRIC | l2leaf | host01 | 172.20.20.111/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host02 | 172.20.20.112/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host03 | 172.20.20.113/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host04 | 172.20.20.114/24 | cEOSLab | Provisioned | - |
 | FABRIC | l3leaf | leaf01 | 172.20.20.101/24 | cEOSLab | Provisioned | - |
 | FABRIC | l3leaf | leaf02 | 172.20.20.102/24 | cEOSLab | Provisioned | - |
 | FABRIC | l3leaf | leaf03 | 172.20.20.103/24 | cEOSLab | Provisioned | - |
@@ -39,6 +43,14 @@
 
 | Type | Node | Node Interface | Peer Type | Peer Node | Peer Interface |
 | ---- | ---- | -------------- | --------- | ----------| -------------- |
+| l2leaf | host01 | Ethernet1 | l3leaf | leaf01 | Ethernet4 |
+| l2leaf | host01 | Ethernet2 | l3leaf | leaf02 | Ethernet4 |
+| l2leaf | host02 | Ethernet1 | l3leaf | leaf03 | Ethernet4 |
+| l2leaf | host02 | Ethernet2 | l3leaf | leaf04 | Ethernet4 |
+| l2leaf | host03 | Ethernet1 | l3leaf | leaf05 | Ethernet4 |
+| l2leaf | host03 | Ethernet2 | l3leaf | leaf06 | Ethernet4 |
+| l2leaf | host04 | Ethernet1 | l3leaf | leaf07 | Ethernet4 |
+| l2leaf | host04 | Ethernet2 | l3leaf | leaf08 | Ethernet4 |
 | l3leaf | leaf01 | Ethernet1 | spine | spine01 | Ethernet1 |
 | l3leaf | leaf01 | Ethernet2 | spine | spine02 | Ethernet1 |
 | l3leaf | leaf01 | Ethernet5 | mlag_peer | leaf02 | Ethernet5 |

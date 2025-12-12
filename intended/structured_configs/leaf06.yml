@@ -53,16 +53,14 @@ ethernet_interfaces:
   switchport:
     enabled: false
 - name: Ethernet4
-  description: SERVER_dc1-leaf01-server1_iLO
+  description: SERVER_host03_Ethernet2
   shutdown: false
-  spanning_tree_portfast: edge
-  peer: dc1-leaf01-server1
-  peer_interface: iLO
+  channel_group:
+    id: 4
+    mode: active
+  peer: host03
+  peer_interface: Ethernet2
   peer_type: server
-  switchport:
-    enabled: true
-    mode: access
-    access_vlan: 11
 hostname: leaf06
 ip_domain_lookup:
   source_interfaces:
@@ -161,6 +159,17 @@ port_channel_interfaces:
     trunk:
       groups:
       - MLAG
+- name: Port-Channel4
+  description: SERVER_host03
+  shutdown: false
+  mlag: 4
+  spanning_tree_portfast: edge
+  switchport:
+    enabled: true
+    mode: trunk
+    trunk:
+      allowed_vlan: 11-12,21-22
+      native_vlan: 4092
 route_maps:
 - name: RM-MLAG-PEER-IN
   sequence_numbers:

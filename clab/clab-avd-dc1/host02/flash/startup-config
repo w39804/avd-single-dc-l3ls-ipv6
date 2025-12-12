@@ -1,12 +1,22 @@
-! Startup-config last modified at Wed Dec 10 17:30:49 2025 by root
+! Startup-config last modified at Fri Dec 12 16:06:06 2025 by ansible
 ! device: host02 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root
 !
-username admin privilege 15 role network-admin secret sha512 $6$6r1RVM3qzkmdHhWB$ej6QA4HxSmzsPgrf4Y0zXs7N8jW/Xo6xIZNOBlAPj3VJdZ27cCRmOMyNOmVFKZMJ4jAbTn1wcj2kj1NmdFhoc.
+username admin privilege 15 role network-admin nopassword
+username ansible privilege 15 role network-admin secret sha512 $6$7u4j1rkb3VELgcZE$EJt2Qff8kd/TapRoci0XaIZsL4tFzgq1YZBLD9c6f/knXzvcYY0NcMKndZeCv0T268knGKhOEwZAxqKjlMm920
 !
 management api http-commands
    no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+daemon TerminAttr
+   exec /usr/bin/TerminAttr -cvaddr=192.168.1.12:9910 -cvauth=token,/tmp/token -cvvrf=MGMT -disableaaa -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -taillogs -cvsourceintf=Management0
+   no shutdown
+!
+vlan internal order ascending range 1006 1199
 !
 no service interface inactive port-id allocation disabled
 !
@@ -15,6 +25,8 @@ transceiver qsfp default-mode 4x10G
 service routing protocols model multi-agent
 !
 hostname host02
+ip domain lookup vrf MGMT source-interface Management0
+ip name-server vrf MGMT 192.168.1.1
 !
 spanning-tree mode mstp
 !
@@ -22,25 +34,57 @@ system l1
    unsupported speed action error
    unsupported error-correction action error
 !
-management api gnmi
-   transport grpc default
+vlan 11
+   name VRF10_VLAN11
 !
-management api netconf
-   transport ssh default
+vlan 12
+   name VRF10_VLAN12
+!
+vlan 21
+   name VRF11_VLAN21
+!
+vlan 22
+   name VRF11_VLAN22
+!
+vlan 31
+   name VRF12_VLAN31
+!
+vlan 32
+   name VRF12_VLAN32
+!
+vlan 3401
+   name L2_VLAN3401
+!
+vlan 3402
+   name L2_VLAN3402
+!
+vrf instance MGMT
+!
+interface Port-Channel1
+   description L2_DC1_L3_POD2_Port-Channel4
+   switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
+   switchport mode trunk
 !
 interface Ethernet1
+   description L2_leaf03_Ethernet4
+   channel-group 1 mode active
 !
 interface Ethernet2
+   description L2_leaf04_Ethernet4
+   channel-group 1 mode active
 !
 interface Management0
+   description OOB_MANAGEMENT
+   vrf MGMT
    ip address 172.20.20.112/24
-   ipv6 address 3fff:172:20:20::7/64
 !
 no ip routing
+no ip routing vrf MGMT
 !
-ip route 0.0.0.0/0 172.20.20.1
+ip route vrf MGMT 0.0.0.0/0 172.20.20.1
 !
-ipv6 route ::/0 3fff:172:20:20::1
+ntp local-interface vrf MGMT Management0
+ntp server vrf MGMT 0.pool.ntp.org prefer
 !
 router multicast
    ipv4

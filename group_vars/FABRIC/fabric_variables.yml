@@ -69,6 +69,9 @@ default_interfaces:
   - types: [l2leaf]
     platforms: [cEOSLab]
     uplink_interfaces: [Ethernet1-2]
+  - types: [l3spine]
+    platforms: [cEOSLab]
+    uplink_interfaces: [Ethernet1-2]
 
 # CloudVision Portal definitions
 cv_settings:

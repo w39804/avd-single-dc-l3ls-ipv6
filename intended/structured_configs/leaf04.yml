@@ -53,13 +53,13 @@ ethernet_interfaces:
   switchport:
     enabled: false
 - name: Ethernet4
-  description: SERVER_dc1-leaf03-server1_PCI2
+  description: SERVER_host02_Ethernet2
   shutdown: false
   channel_group:
     id: 4
     mode: active
-  peer: dc1-leaf03-server1
-  peer_interface: PCI2
+  peer: host02
+  peer_interface: Ethernet2
   peer_type: server
 hostname: leaf04
 ip_domain_lookup:
@@ -160,7 +160,7 @@ port_channel_interfaces:
       groups:
       - MLAG
 - name: Port-Channel4
-  description: SERVER_dc1-leaf03-server1
+  description: SERVER_host02
   shutdown: false
   mlag: 4
   spanning_tree_portfast: edge

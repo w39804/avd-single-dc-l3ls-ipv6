@@ -50,6 +50,7 @@ l3leaf:
           id: 2
           mgmt_ip: 172.20.20.102/24
           uplink_switch_interfaces: [Ethernet2, Ethernet2]
+ 
     - group: DC1_L3_POD2
       bgp_as: 65102
       nodes:
@@ -61,6 +62,7 @@ l3leaf:
           id: 4
           mgmt_ip: 172.20.20.104/24
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
+
     - group: DC1_L3_POD3
       bgp_as: 65103
       nodes:
@@ -72,6 +74,7 @@ l3leaf:
           id: 6
           mgmt_ip: 172.20.20.106/24
           uplink_switch_interfaces: [Ethernet6, Ethernet6]
+          
     - group: DC1_L3_POD4
       bgp_as: 65104
       nodes:

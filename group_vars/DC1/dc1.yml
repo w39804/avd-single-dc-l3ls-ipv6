@@ -1,6 +1,7 @@
 ---
 # Default gateway used for the management interface
-mgmt_gateway: 172.20.20.1
+#mgmt_gateway: 172.20.20.1
+ipv6_mgmt_gateway: 3fff:172:20:20::1
 
 management_eapi:
   enabled: true

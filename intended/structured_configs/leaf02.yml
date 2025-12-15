@@ -84,12 +84,12 @@ ipv6_prefix_lists:
   sequence_numbers:
   - sequence: 10
     action: permit 2001:db8:4::/64
+ipv6_static_routes:
+- vrf: MGMT
+  prefix: ::/0
+  next_hop: 3fff:172:20:20::1
 ipv6_unicast_routing: true
 local_users:
-- name: admin
-  privilege: 15
-  role: network-admin
-  no_password: true
 - name: ansible
   privilege: 15
   role: network-admin
@@ -107,17 +107,17 @@ loopback_interfaces:
   description: DIAG_VRF_VRF10
   shutdown: false
   vrf: VRF10
-  ip_address: 10.255.10.2/32
+  ipv6_address: 2602:10:ff:10::2/128
 - name: Loopback11
   description: DIAG_VRF_VRF11
   shutdown: false
   vrf: VRF11
-  ip_address: 10.255.11.2/32
+  ipv6_address: 2602:11:ff::2/128
 - name: Loopback12
   description: DIAG_VRF_VRF12
   shutdown: false
   vrf: VRF12
-  ip_address: 10.255.12.2/32
+  ipv6_address: 2602:12:ff:12::2/128
 management_api_http:
   enable_https: true
   enable_vrfs:
@@ -127,9 +127,10 @@ management_interfaces:
   description: OOB_MANAGEMENT
   shutdown: false
   vrf: MGMT
-  ip_address: 172.20.20.102/24
+  ipv6_enable: true
+  ipv6_address: 3fff:172:20:20::102/64
   type: oob
-  gateway: 172.20.20.1
+  ipv6_gateway: 3fff:172:20:20::1
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -402,18 +403,14 @@ spanning_tree:
   - id: '0'
     priority: 4096
   no_spanning_tree_vlan: 4093-4094
-static_routes:
-- vrf: MGMT
-  prefix: 0.0.0.0/0
-  next_hop: 172.20.20.1
 transceiver_qsfp_default_mode_4x10: true
 virtual_source_nat_vrfs:
 - name: VRF10
-  ip_address: 10.255.10.2
+  ipv6_address: 2602:10:ff:10::2
 - name: VRF11
-  ip_address: 10.255.11.2
+  ipv6_address: 2602:11:ff::2
 - name: VRF12
-  ip_address: 10.255.12.2
+  ipv6_address: 2602:12:ff:12::2
 vlan_interfaces:
 - name: Vlan4093
   description: MLAG_L3
@@ -430,13 +427,17 @@ vlan_interfaces:
   description: VRF10_VLAN11
   shutdown: false
   vrf: VRF10
-  ip_address_virtual: 10.10.11.1/24
+  ipv6_enable: true
+  ipv6_address_virtuals:
+  - 2602:0010:FF:11::1/64
   tenant: TENANT1
 - name: Vlan12
   description: VRF10_VLAN12
   shutdown: false
   vrf: VRF10
-  ip_address_virtual: 10.10.12.1/24
+  ipv6_enable: true
+  ipv6_address_virtuals:
+  - 2602:0010:FF:12::1/64
   tenant: TENANT1
 - name: Vlan3009
   description: MLAG_L3_VRF_VRF10
@@ -458,7 +459,9 @@ vlan_interfaces:
   description: VRF11_VLAN22
   shutdown: false
   vrf: VRF11
-  ip_address_virtual: 10.10.22.1/24
+  ipv6_enable: true
+  ipv6_address_virtuals:
+  - 2602:0011:FF:22::1/64
   tenant: TENANT1
 - name: Vlan3010
   description: MLAG_L3_VRF_VRF11
@@ -550,8 +553,10 @@ vlans:
 vrfs:
 - name: MGMT
   ip_routing: false
+  ipv6_routing: false
 - name: VRF10
   ip_routing: true
+  ipv6_routing: true
   tenant: TENANT1
 - name: VRF11
   ip_routing: true

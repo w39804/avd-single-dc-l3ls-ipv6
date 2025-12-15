@@ -19,7 +19,7 @@ l2leaf:
       nodes:
         - name: host01
           id: 1
-          mgmt_ip: 172.20.20.111/24
+          ipv6_mgmt_ip: 3fff:172:20:20::111/64
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
 
     - group: HOST02
@@ -27,7 +27,7 @@ l2leaf:
       nodes:
         - name: host02
           id: 2
-          mgmt_ip: 172.20.20.112/24
+          ipv6_mgmt_ip: 3fff:172:20:20::112/64
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
          
     - group: HOST03
@@ -35,7 +35,7 @@ l2leaf:
       nodes:
         - name: host03
           id: 1
-          mgmt_ip: 172.20.20.113/24
+          ipv6_mgmt_ip: 3fff:172:20:20::113/64
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
   
     - group: HOST04
@@ -43,6 +43,6 @@ l2leaf:
       nodes:
         - name: host04
           id: 2
-          mgmt_ip: 172.20.20.114/24
+          ipv6_mgmt_ip: 3fff:172:20:20::114/64
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
 

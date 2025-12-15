@@ -4,49 +4,65 @@ topology:
   kinds:
     ceos:
       image: ceos:4.34.2F
+      env:
+        CLAB_MGMT_VRF: MGMT
   nodes:
     leaf01:
       kind: ceos
-      mgmt-ipv4: 172.20.20.101
+      mgmt-ipv6: 3fff:172:20:20::101
+      startup-config: intended/configs/leaf01.cfg
     leaf02:
       kind: ceos
-      mgmt-ipv4: 172.20.20.102
+      mgmt-ipv6: 3fff:172:20:20::102
+      startup-config: intended/configs/leaf02.cfg
     leaf03:
       kind: ceos
-      mgmt-ipv4: 172.20.20.103
+      mgmt-ipv6: 3fff:172:20:20::103
+      startup-config: intended/configs/leaf03.cfg
     leaf04:
       kind: ceos
-      mgmt-ipv4: 172.20.20.104
+      mgmt-ipv6: 3fff:172:20:20::104
+      startup-config: intended/configs/leaf04.cfg
     leaf05:
       kind: ceos
-      mgmt-ipv4: 172.20.20.105
+      mgmt-ipv6: 3fff:172:20:20::105
+      startup-config: intended/configs/leaf05.cfg
     leaf06:
       kind: ceos
-      mgmt-ipv4: 172.20.20.106
+      mgmt-ipv6: 3fff:172:20:20::106
+      startup-config: intended/configs/leaf06.cfg
     leaf07:
       kind: ceos
-      mgmt-ipv4: 172.20.20.107
+      mgmt-ipv6: 3fff:172:20:20::107
+      startup-config: intended/configs/leaf07.cfg
     leaf08:
       kind: ceos
-      mgmt-ipv4: 172.20.20.108
+      mgmt-ipv6: 3fff:172:20:20::108
+      startup-config: intended/configs/leaf08.cfg
     host01:
       kind: ceos
-      mgmt-ipv4: 172.20.20.111
+      mgmt-ipv6: 3fff:172:20:20::111
+      startup-config: intended/configs/host01.cfg
     host02:
       kind: ceos
-      mgmt-ipv4: 172.20.20.112
+      mgmt-ipv6: 3fff:172:20:20::112
+      startup-config: intended/configs/host01.cfg
     host03:
       kind: ceos
-      mgmt-ipv4: 172.20.20.113
+      mgmt-ipv6: 3fff:172:20:20::113
+      startup-config: intended/configs/host01.cfg
     host04:
       kind: ceos
-      mgmt-ipv4: 172.20.20.114
+      mgmt-ipv6: 3fff:172:20:20::114
+      startup-config: intended/configs/host01.cfg
     spine01:
       kind: ceos
-      mgmt-ipv4: 172.20.20.201
+      mgmt-ipv6: 3fff:172:20:20::201
+      startup-config: intended/configs/spine01.cfg
     spine02:
       kind: ceos
-      mgmt-ipv4: 172.20.20.202
+      mgmt-ipv6: 3fff:172:20:20::202
+      startup-config: intended/configs/spine02.cfg
 
   links:
     - endpoints: ["leaf01:eth1", "spine01:eth1"]

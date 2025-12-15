@@ -36,7 +36,7 @@
   - [Virtual Router MAC Address](#virtual-router-mac-address)
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
-  - [Static Routes](#static-routes)
+  - [IPv6 Static Routes](#ipv6-static-routes)
   - [Router BGP](#router-bgp)
 - [BFD](#bfd)
   - [Router BFD](#router-bfd)
@@ -62,13 +62,13 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | 172.20.20.103/24 | 172.20.20.1 |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
 
 ##### IPv6
 
 | Management Interface | Description | Type | VRF | IPv6 Address | IPv6 Gateway |
 | -------------------- | ----------- | ---- | --- | ------------ | ------------ |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | 3fff:172:20:20::103/64 | 3fff:172:20:20::1 |
 
 #### Management Interfaces Device Configuration
 
@@ -78,7 +78,8 @@ interface Management0
    description OOB_MANAGEMENT
    no shutdown
    vrf MGMT
-   ip address 172.20.20.103/24
+   ipv6 enable
+   ipv6 address 3fff:172:20:20::103/64
 ```
 
 ### IP Name Servers
@@ -167,14 +168,12 @@ management api http-commands
 
 | User | Privilege | Role | Disabled | Shell |
 | ---- | --------- | ---- | -------- | ----- |
-| admin | 15 | network-admin | False | - |
 | ansible | 15 | network-admin | False | - |
 
 #### Local Users Device Configuration
 
 ```eos
 !
-username admin privilege 15 role network-admin nopassword
 username ansible privilege 15 role network-admin secret sha512 <removed>
 ```
 
@@ -433,9 +432,9 @@ interface Port-Channel5
 | --------- | ----------- | --- | ---------- |
 | Loopback0 | ROUTER_ID | default | - |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | - |
-| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 10.255.10.3/32 |
-| Loopback11 | DIAG_VRF_VRF11 | VRF11 | 10.255.11.3/32 |
-| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 10.255.12.3/32 |
+| Loopback10 | DIAG_VRF_VRF10 | VRF10 | - |
+| Loopback11 | DIAG_VRF_VRF11 | VRF11 | - |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | - |
 
 ##### IPv6
 
@@ -443,9 +442,9 @@ interface Port-Channel5
 | --------- | ----------- | --- | ------------ |
 | Loopback0 | ROUTER_ID | default | 2001:db8:1:3::1/64 |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | 2001:db8:5:3::1/64 |
-| Loopback10 | DIAG_VRF_VRF10 | VRF10 | - |
-| Loopback11 | DIAG_VRF_VRF11 | VRF11 | - |
-| Loopback12 | DIAG_VRF_VRF12 | VRF12 | - |
+| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 2602:10:ff:10::3/128 |
+| Loopback11 | DIAG_VRF_VRF11 | VRF11 | 2602:11:ff::3/128 |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 2602:12:ff:12::3/128 |
 
 #### Loopback Interfaces Device Configuration
 
@@ -465,19 +464,19 @@ interface Loopback10
    description DIAG_VRF_VRF10
    no shutdown
    vrf VRF10
-   ip address 10.255.10.3/32
+   ipv6 address 2602:10:ff:10::3/128
 !
 interface Loopback11
    description DIAG_VRF_VRF11
    no shutdown
    vrf VRF11
-   ip address 10.255.11.3/32
+   ipv6 address 2602:11:ff::3/128
 !
 interface Loopback12
    description DIAG_VRF_VRF12
    no shutdown
    vrf VRF12
-   ip address 10.255.12.3/32
+   ipv6 address 2602:12:ff:12::3/128
 ```
 
 ### VLAN Interfaces
@@ -502,10 +501,10 @@ interface Loopback12
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ------ | ------- |
-| Vlan11 |  VRF10  |  -  |  10.10.11.1/24  |  -  |  -  |  -  |
-| Vlan12 |  VRF10  |  -  |  10.10.12.1/24  |  -  |  -  |  -  |
+| Vlan11 |  VRF10  |  -  |  -  |  -  |  -  |  -  |
+| Vlan12 |  VRF10  |  -  |  -  |  -  |  -  |  -  |
 | Vlan21 |  VRF11  |  -  |  -  |  -  |  -  |  -  |
-| Vlan22 |  VRF11  |  -  |  10.10.22.1/24  |  -  |  -  |  -  |
+| Vlan22 |  VRF11  |  -  |  -  |  -  |  -  |  -  |
 | Vlan31 |  VRF12  |  -  |  -  |  -  |  -  |  -  |
 | Vlan32 |  VRF12  |  -  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  VRF10  |  -  |  -  |  -  |  -  |  -  |
@@ -518,7 +517,10 @@ interface Loopback12
 
 | Interface | VRF | IPv6 Address | IPv6 Virtual Addresses | Virtual Router Addresses | ND RA Disabled | Managed Config Flag | Other Config Flag | IPv6 ACL In | IPv6 ACL Out |
 | --------- | --- | ------------ | ---------------------- | ------------------------ | -------------- | ------------------- | ----------------- | ----------- | ------------ |
+| Vlan11 | VRF10 | - | 2602:0010:FF:11::1/64 | - | - | - | - | - | - |
+| Vlan12 | VRF10 | - | 2602:0010:FF:12::1/64 | - | - | - | - | - | - |
 | Vlan21 | VRF11 | - | 2001:DB8:21::1/48 | - | - | - | - | - | - |
+| Vlan22 | VRF11 | - | 2602:0011:FF:22::1/64 | - | - | - | - | - | - |
 | Vlan31 | VRF12 | - | 2001:DB8:31::1/48 | - | - | - | - | - | - |
 | Vlan32 | VRF12 | - | 2001:DB8:32::1/48 | - | - | - | - | - | - |
 | Vlan3009 | VRF10 | 2001:db8:4:2::1/64 | - | - | - | - | - | - | - |
@@ -535,13 +537,15 @@ interface Vlan11
    description VRF10_VLAN11
    no shutdown
    vrf VRF10
-   ip address virtual 10.10.11.1/24
+   ipv6 enable
+   ipv6 address virtual 2602:0010:FF:11::1/64
 !
 interface Vlan12
    description VRF10_VLAN12
    no shutdown
    vrf VRF10
-   ip address virtual 10.10.12.1/24
+   ipv6 enable
+   ipv6 address virtual 2602:0010:FF:12::1/64
 !
 interface Vlan21
    description VRF11_VLAN21
@@ -554,7 +558,8 @@ interface Vlan22
    description VRF11_VLAN22
    no shutdown
    vrf VRF11
-   ip address virtual 10.10.22.1/24
+   ipv6 enable
+   ipv6 address virtual 2602:0011:FF:22::1/64
 !
 interface Vlan31
    description VRF12_VLAN31
@@ -715,7 +720,7 @@ ip routing vrf VRF12
 | --- | --------------- |
 | default | True |
 | MGMT | false |
-| VRF10 | false |
+| VRF10 | true |
 | VRF11 | true |
 | VRF12 | true |
 
@@ -724,23 +729,24 @@ ip routing vrf VRF12
 ```eos
 !
 ipv6 unicast-routing
+ipv6 unicast-routing vrf VRF10
 ipv6 unicast-routing vrf VRF11
 ipv6 unicast-routing vrf VRF12
 ```
 
-### Static Routes
+### IPv6 Static Routes
 
-#### Static Routes Summary
+#### IPv6 Static Routes Summary
 
-| VRF | Destination Prefix | Next Hop IP | Exit interface | Administrative Distance | Tag | Route Name | Metric |
-| --- | ------------------ | ----------- | -------------- | ----------------------- | --- | ---------- | ------ |
-| MGMT | 0.0.0.0/0 | 172.20.20.1 | - | 1 | - | - | - |
+| VRF | Destination Prefix | Next Hop IP             | Exit interface      | Administrative Distance       | Tag               | Route Name                    | Metric         |
+| --- | ------------------ | ----------------------- | ------------------- | ----------------------------- | ----------------- | ----------------------------- | -------------- |
+| MGMT | ::/0 | 3fff:172:20:20::1 | - | 1 | - | - | - |
 
 #### Static Routes Device Configuration
 
 ```eos
 !
-ip route vrf MGMT 0.0.0.0/0 172.20.20.1
+ipv6 route vrf MGMT ::/0 3fff:172:20:20::1
 ```
 
 ### Router BGP
@@ -1083,15 +1089,15 @@ vrf instance VRF12
 
 | Source NAT VRF | Source NAT IPv4 Address | Source NAT IPv6 Address |
 | -------------- | ----------------------- | ----------------------- |
-| VRF10 | 10.255.10.3 | - |
-| VRF11 | 10.255.11.3 | - |
-| VRF12 | 10.255.12.3 | - |
+| VRF10 | - | 2602:10:ff:10::3 |
+| VRF11 | - | 2602:11:ff::3 |
+| VRF12 | - | 2602:12:ff:12::3 |
 
 ### Virtual Source NAT Configuration
 
 ```eos
 !
-ip address virtual source-nat vrf VRF10 address 10.255.10.3
-ip address virtual source-nat vrf VRF11 address 10.255.11.3
-ip address virtual source-nat vrf VRF12 address 10.255.12.3
+ipv6 address virtual source-nat vrf VRF10 address 2602:10:ff:10::3
+ipv6 address virtual source-nat vrf VRF11 address 2602:11:ff::3
+ipv6 address virtual source-nat vrf VRF12 address 2602:12:ff:12::3
 ```

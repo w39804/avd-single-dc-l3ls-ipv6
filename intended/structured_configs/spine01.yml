@@ -108,12 +108,12 @@ ipv6_prefix_lists:
   sequence_numbers:
   - sequence: 10
     action: permit 2001:db8::/48 eq 64
+ipv6_static_routes:
+- vrf: MGMT
+  prefix: ::/0
+  next_hop: 3fff:172:20:20::1
 ipv6_unicast_routing: true
 local_users:
-- name: admin
-  privilege: 15
-  role: network-admin
-  no_password: true
 - name: ansible
   privilege: 15
   role: network-admin
@@ -132,9 +132,10 @@ management_interfaces:
   description: OOB_MANAGEMENT
   shutdown: false
   vrf: MGMT
-  ip_address: 172.20.20.201/24
+  ipv6_enable: true
+  ipv6_address: 3fff:172:20:20::201/64
   type: oob
-  gateway: 172.20.20.1
+  ipv6_gateway: 3fff:172:20:20::1
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -281,10 +282,6 @@ router_bgp:
 service_routing_protocols_model: multi-agent
 spanning_tree:
   mode: none
-static_routes:
-- vrf: MGMT
-  prefix: 0.0.0.0/0
-  next_hop: 172.20.20.1
 transceiver_qsfp_default_mode_4x10: true
 vlan_internal_order:
   allocation: ascending
@@ -294,3 +291,4 @@ vlan_internal_order:
 vrfs:
 - name: MGMT
   ip_routing: false
+  ipv6_routing: false

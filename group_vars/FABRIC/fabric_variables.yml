@@ -10,8 +10,6 @@ eos_designs_documentation:
 # Define underlay and overlay routing protocol to be used
 underlay_routing_protocol: ebgp
 overlay_routing_protocol: ebgp
-#underlay_routing_protocol: ospf
-#overlay_routing_protocol: ibgp
 
 # Local users
 aaa_settings:
@@ -22,10 +20,11 @@ aaa_settings:
       role: network-admin
       # Password set to "ansible". Same string as the device generates when configuring a username.
       sha512_password: $6$7u4j1rkb3VELgcZE$EJt2Qff8kd/TapRoci0XaIZsL4tFzgq1YZBLD9c6f/knXzvcYY0NcMKndZeCv0T268knGKhOEwZAxqKjlMm920
-    - name: admin
-      privilege: 15
-      role: network-admin
-      no_password: true
+#    - name: admin
+#      privilege: 15
+#      role: network-admin
+#      #sha512_password: $y$j9T$xSWN6cFaPRu8AIH1fjaMc/$5iubtboKTyf5m2El4uYOs1bR4F.u2gH0s7S6r7vT/n5
+#      no_password: true
 
 default_platform_settings:
   - platforms: ['CEOS', 'cEOS', 'ceos', 'cEOSLab']

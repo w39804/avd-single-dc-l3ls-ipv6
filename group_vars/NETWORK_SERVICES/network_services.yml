@@ -16,7 +16,7 @@ tenants:
           loopback: 10
           # Loopback ip range, a unique ip is derived from this ranged and assigned
           # to each l3 leaf based on it's unique id.
-          loopback_ip_range: 10.255.10.0/27
+          loopback_ipv6_range: 2602:0010:FF:10::/64
         svis:
           # SVI definitions.
           - id: 11
@@ -24,16 +24,16 @@ tenants:
             name: VRF10_VLAN11
             enabled: true
             # IP anycast gateway to be used in the SVI in every leaf.
-            ip_address_virtual: 10.10.11.1/24
+            ipv6_address_virtuals: [2602:0010:FF:11::1/64]
           - id: 12
             name: VRF10_VLAN12
             enabled: true
-            ip_address_virtual: 10.10.12.1/24
+            ipv6_address_virtuals: [2602:0010:FF:12::1/64]
       - name: VRF11
         vrf_vni: 11
         vtep_diagnostic:
           loopback: 11
-          loopback_ip_range: 10.255.11.0/27
+          loopback_ipv6_range: 2602:0011:FF:11::/48
         svis:
           - id: 21
             name: VRF11_VLAN21
@@ -42,12 +42,12 @@ tenants:
           - id: 22
             name: VRF11_VLAN22
             enabled: true
-            ip_address_virtual: 10.10.22.1/24
+            ipv6_address_virtuals: [2602:0011:FF:22::1/64]
       - name: VRF12
         vrf_vni: 12
         vtep_diagnostic:
           loopback: 12
-          loopback_ip_range: 10.255.12.0/27
+          loopback_ipv6_range: 2602:0012:FF:12::/64
         svis:
           - id: 31
             name: VRF12_VLAN31

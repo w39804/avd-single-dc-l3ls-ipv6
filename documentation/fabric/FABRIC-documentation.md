@@ -17,20 +17,20 @@
 
 | POD | Type | Node | Management IP | Platform | Provisioned in CloudVision | Serial Number |
 | --- | ---- | ---- | ------------- | -------- | -------------------------- | ------------- |
-| FABRIC | l2leaf | host01 | 172.20.20.111/24 | cEOSLab | Provisioned | - |
-| FABRIC | l2leaf | host02 | 172.20.20.112/24 | cEOSLab | Provisioned | - |
-| FABRIC | l2leaf | host03 | 172.20.20.113/24 | cEOSLab | Provisioned | - |
-| FABRIC | l2leaf | host04 | 172.20.20.114/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf01 | 172.20.20.101/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf02 | 172.20.20.102/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf03 | 172.20.20.103/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf04 | 172.20.20.104/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf05 | 172.20.20.105/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf06 | 172.20.20.106/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf07 | 172.20.20.107/24 | cEOSLab | Provisioned | - |
-| FABRIC | l3leaf | leaf08 | 172.20.20.108/24 | cEOSLab | Provisioned | - |
-| FABRIC | spine | spine01 | 172.20.20.201/24 | cEOSLab | Provisioned | - |
-| FABRIC | spine | spine02 | 172.20.20.202/24 | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host01 | - | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host02 | - | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host03 | - | cEOSLab | Provisioned | - |
+| FABRIC | l2leaf | host04 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf01 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf02 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf03 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf04 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf05 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf06 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf07 | - | cEOSLab | Provisioned | - |
+| FABRIC | l3leaf | leaf08 | - | cEOSLab | Provisioned | - |
+| FABRIC | spine | spine01 | - | cEOSLab | Provisioned | - |
+| FABRIC | spine | spine02 | - | cEOSLab | Provisioned | - |
 
 > Provision status is based on Ansible inventory declaration and do not represent real status from CloudVision.
 

@@ -21,8 +21,8 @@ spine:
       # Unique identifier used for IP addressing and other algorithms
       id: 1
       # Node management interface IPv4 address
-      mgmt_ip: 172.20.20.201/24
+      ipv6_mgmt_ip: 3fff:172:20:20::201/64
 
     - name: spine02
       id: 2
-      mgmt_ip: 172.20.20.202/24
+      ipv6_mgmt_ip: 3fff:172:20:20::202/64

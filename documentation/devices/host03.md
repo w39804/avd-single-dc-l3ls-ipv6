@@ -30,7 +30,7 @@
   - [Service Routing Protocols Model](#service-routing-protocols-model)
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
-  - [Static Routes](#static-routes)
+  - [IPv6 Static Routes](#ipv6-static-routes)
 - [Multicast](#multicast)
   - [IP IGMP Snooping](#ip-igmp-snooping)
 - [VRF Instances](#vrf-instances)
@@ -47,13 +47,13 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | 172.20.20.113/24 | 172.20.20.1 |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
 
 ##### IPv6
 
 | Management Interface | Description | Type | VRF | IPv6 Address | IPv6 Gateway |
 | -------------------- | ----------- | ---- | --- | ------------ | ------------ |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | 3fff:172:20:20::113/64 | 3fff:172:20:20::1 |
 
 #### Management Interfaces Device Configuration
 
@@ -63,7 +63,8 @@ interface Management0
    description OOB_MANAGEMENT
    no shutdown
    vrf MGMT
-   ip address 172.20.20.113/24
+   ipv6 enable
+   ipv6 address 3fff:172:20:20::113/64
 ```
 
 ### IP Name Servers
@@ -152,14 +153,12 @@ management api http-commands
 
 | User | Privilege | Role | Disabled | Shell |
 | ---- | --------- | ---- | -------- | ----- |
-| admin | 15 | network-admin | False | - |
 | ansible | 15 | network-admin | False | - |
 
 #### Local Users Device Configuration
 
 ```eos
 !
-username admin privilege 15 role network-admin nopassword
 username ansible privilege 15 role network-admin secret sha512 <removed>
 ```
 
@@ -365,12 +364,14 @@ service routing protocols model multi-agent
 
 | VRF | Routing Enabled |
 | --- | --------------- |
-| default | False |
+| default | True |
 | MGMT | False |
 
 #### IP Routing Device Configuration
 
 ```eos
+!
+ip routing
 no ip routing vrf MGMT
 ```
 
@@ -383,19 +384,19 @@ no ip routing vrf MGMT
 | default | False |
 | MGMT | false |
 
-### Static Routes
+### IPv6 Static Routes
 
-#### Static Routes Summary
+#### IPv6 Static Routes Summary
 
-| VRF | Destination Prefix | Next Hop IP | Exit interface | Administrative Distance | Tag | Route Name | Metric |
-| --- | ------------------ | ----------- | -------------- | ----------------------- | --- | ---------- | ------ |
-| MGMT | 0.0.0.0/0 | 172.20.20.1 | - | 1 | - | - | - |
+| VRF | Destination Prefix | Next Hop IP             | Exit interface      | Administrative Distance       | Tag               | Route Name                    | Metric         |
+| --- | ------------------ | ----------------------- | ------------------- | ----------------------------- | ----------------- | ----------------------------- | -------------- |
+| MGMT | ::/0 | 3fff:172:20:20::1 | - | 1 | - | - | - |
 
 #### Static Routes Device Configuration
 
 ```eos
 !
-ip route vrf MGMT 0.0.0.0/0 172.20.20.1
+ipv6 route vrf MGMT ::/0 3fff:172:20:20::1
 ```
 
 ## Multicast

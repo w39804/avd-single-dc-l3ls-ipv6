@@ -42,11 +42,11 @@ ip_igmp_snooping:
 ip_name_servers:
 - ip_address: 192.168.1.1
   vrf: MGMT
+ipv6_static_routes:
+- vrf: MGMT
+  prefix: ::/0
+  next_hop: 3fff:172:20:20::1
 local_users:
-- name: admin
-  privilege: 15
-  role: network-admin
-  no_password: true
 - name: ansible
   privilege: 15
   role: network-admin
@@ -60,9 +60,10 @@ management_interfaces:
   description: OOB_MANAGEMENT
   shutdown: false
   vrf: MGMT
-  ip_address: 172.20.20.111/24
+  ipv6_enable: true
+  ipv6_address: 3fff:172:20:20::111/64
   type: oob
-  gateway: 172.20.20.1
+  ipv6_gateway: 3fff:172:20:20::1
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -90,10 +91,6 @@ spanning_tree:
   mst_instances:
   - id: '0'
     priority: 32768
-static_routes:
-- vrf: MGMT
-  prefix: 0.0.0.0/0
-  next_hop: 172.20.20.1
 transceiver_qsfp_default_mode_4x10: true
 vlan_internal_order:
   allocation: ascending
@@ -128,3 +125,4 @@ vlans:
 vrfs:
 - name: MGMT
   ip_routing: false
+  ipv6_routing: false

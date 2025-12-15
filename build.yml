@@ -14,11 +14,4 @@
       ansible.builtin.import_role:
         name: arista.avd.eos_cli_config_gen
 
-#- name: Static Routing
-#  hosts: TENANT_HOSTS
-#  gather_facts: false
-#  tasks:
-#    - name: Static routes
-#      #ansible.builtin.import_role:
-#      #  name: arista.eos.eos_static_routes
 

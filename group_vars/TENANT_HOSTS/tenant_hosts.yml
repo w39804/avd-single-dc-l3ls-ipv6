@@ -21,7 +21,7 @@ l2leaf:
           id: 1
           mgmt_ip: 172.20.20.111/24
           uplink_switch_interfaces: [Ethernet4, Ethernet4]
- 
+
     - group: HOST02
       uplink_switches: [leaf03, leaf04]
       nodes:

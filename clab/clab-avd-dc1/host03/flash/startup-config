@@ -1,4 +1,4 @@
-! Startup-config last modified at Fri Dec 12 16:06:06 2025 by ansible
+! Startup-config last modified at Fri Dec 12 17:43:47 2025 by ansible
 ! device: host03 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root
@@ -77,6 +77,10 @@ interface Management0
    description OOB_MANAGEMENT
    vrf MGMT
    ip address 172.20.20.113/24
+!
+interface Vlan21
+   description vrf-irb-vlan21
+   ipv6 address 2001:db8:21::203/48
 !
 no ip routing
 no ip routing vrf MGMT

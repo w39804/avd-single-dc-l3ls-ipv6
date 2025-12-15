@@ -1,0 +1,11 @@
+vlan_interfaces:
+  - name: "Vlan21"
+    description: vrf-irb-vlan21
+    shutdown: False
+    vrf: default
+    ipv6_address: "2001:db8:21::204/48"
+
+static_routes:
+  - vrf: default
+    destination_address_prefix: "::/0"
+    gateway: "2001:db8:21::1"

@@ -25,6 +25,7 @@
 - [Interfaces](#interfaces)
   - [Ethernet Interfaces](#ethernet-interfaces)
   - [Port-Channel Interfaces](#port-channel-interfaces)
+  - [VLAN Interfaces](#vlan-interfaces)
 - [Routing](#routing)
   - [Service Routing Protocols Model](#service-routing-protocols-model)
   - [IP Routing](#ip-routing)
@@ -316,6 +317,37 @@ interface Port-Channel1
    switchport
 ```
 
+### VLAN Interfaces
+
+#### VLAN Interfaces Summary
+
+| Interface | Description | VRF |  MTU | Shutdown |
+| --------- | ----------- | --- | ---- | -------- |
+| Vlan21 | vrf-irb-vlan21 | default | - | False |
+
+##### IPv4
+
+| Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | ACL In | ACL Out |
+| --------- | --- | ---------- | ------------------ | ------------------------- | ------ | ------- |
+| Vlan21 |  default  |  -  |  -  |  -  |  -  |  -  |
+
+##### IPv6
+
+| Interface | VRF | IPv6 Address | IPv6 Virtual Addresses | Virtual Router Addresses | ND RA Disabled | Managed Config Flag | Other Config Flag | IPv6 ACL In | IPv6 ACL Out |
+| --------- | --- | ------------ | ---------------------- | ------------------------ | -------------- | ------------------- | ----------------- | ----------- | ------------ |
+| Vlan21 | default | 2001:db8:21::201/48 | - | - | - | - | - | - | - |
+
+#### VLAN Interfaces Device Configuration
+
+```eos
+!
+interface Vlan21
+   description vrf-irb-vlan21
+   no shutdown
+   vrf default
+   ipv6 address 2001:db8:21::201/48
+```
+
 ## Routing
 
 ### Service Routing Protocols Model
@@ -333,12 +365,14 @@ service routing protocols model multi-agent
 
 | VRF | Routing Enabled |
 | --- | --------------- |
-| default | False |
+| default | True |
 | MGMT | False |
 
 #### IP Routing Device Configuration
 
 ```eos
+!
+ip routing
 no ip routing vrf MGMT
 ```
 

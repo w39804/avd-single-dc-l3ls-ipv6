@@ -32,12 +32,6 @@ all:
                 leaf06:
                 leaf07:
                 leaf08:
-#            DC1_L2_LEAVES:
-#              hosts:
-#                host01:
-#                host02:
-#                host03:
-#                host04:
             TENANT_HOSTS:
               hosts:
                 host01:

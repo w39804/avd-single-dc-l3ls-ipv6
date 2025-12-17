@@ -107,7 +107,7 @@ loopback_interfaces:
   description: DIAG_VRF_VRF10
   shutdown: false
   vrf: VRF10
-  ipv6_address: 2602:10:ff:10::8/128
+  ipv6_address: 2602:10:ff::8/128
 - name: Loopback11
   description: DIAG_VRF_VRF11
   shutdown: false
@@ -117,7 +117,7 @@ loopback_interfaces:
   description: DIAG_VRF_VRF12
   shutdown: false
   vrf: VRF12
-  ipv6_address: 2602:12:ff:12::8/128
+  ipv6_address: 2602:12:ff::8/128
 management_api_http:
   enable_https: true
   enable_vrfs:
@@ -168,7 +168,7 @@ port_channel_interfaces:
     enabled: true
     mode: trunk
     trunk:
-      allowed_vlan: 11-12,21-22,31-32,3401-3402
+      allowed_vlan: none
 route_maps:
 - name: RM-MLAG-PEER-IN
   sequence_numbers:
@@ -404,11 +404,11 @@ spanning_tree:
 transceiver_qsfp_default_mode_4x10: true
 virtual_source_nat_vrfs:
 - name: VRF10
-  ipv6_address: 2602:10:ff:10::8
+  ipv6_address: 2602:10:ff::8
 - name: VRF11
   ipv6_address: 2602:11:ff::8
 - name: VRF12
-  ipv6_address: 2602:12:ff:12::8
+  ipv6_address: 2602:12:ff::8
 vlan_interfaces:
 - name: Vlan4093
   description: MLAG_L3

@@ -19,9 +19,6 @@
 - [Internal VLAN Allocation Policy](#internal-vlan-allocation-policy)
   - [Internal VLAN Allocation Policy Summary](#internal-vlan-allocation-policy-summary)
   - [Internal VLAN Allocation Policy Device Configuration](#internal-vlan-allocation-policy-device-configuration)
-- [VLANs](#vlans)
-  - [VLANs Summary](#vlans-summary)
-  - [VLANs Device Configuration](#vlans-device-configuration)
 - [Interfaces](#interfaces)
   - [Ethernet Interfaces](#ethernet-interfaces)
   - [Port-Channel Interfaces](#port-channel-interfaces)
@@ -220,50 +217,6 @@ spanning-tree mst 0 priority 32768
 vlan internal order ascending range 1006 1199
 ```
 
-## VLANs
-
-### VLANs Summary
-
-| VLAN ID | Name | Trunk Groups |
-| ------- | ---- | ------------ |
-| 11 | VRF10_VLAN11 | - |
-| 12 | VRF10_VLAN12 | - |
-| 21 | VRF11_VLAN21 | - |
-| 22 | VRF11_VLAN22 | - |
-| 31 | VRF12_VLAN31 | - |
-| 32 | VRF12_VLAN32 | - |
-| 3401 | L2_VLAN3401 | - |
-| 3402 | L2_VLAN3402 | - |
-
-### VLANs Device Configuration
-
-```eos
-!
-vlan 11
-   name VRF10_VLAN11
-!
-vlan 12
-   name VRF10_VLAN12
-!
-vlan 21
-   name VRF11_VLAN21
-!
-vlan 22
-   name VRF11_VLAN22
-!
-vlan 31
-   name VRF12_VLAN31
-!
-vlan 32
-   name VRF12_VLAN32
-!
-vlan 3401
-   name L2_VLAN3401
-!
-vlan 3402
-   name L2_VLAN3402
-```
-
 ## Interfaces
 
 ### Ethernet Interfaces
@@ -274,8 +227,8 @@ vlan 3402
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet1 | L2_leaf05_Ethernet4 | *trunk | *11-12,21-22,31-32,3401-3402 | *- | *- | 1 |
-| Ethernet2 | L2_leaf06_Ethernet4 | *trunk | *11-12,21-22,31-32,3401-3402 | *- | *- | 1 |
+| Ethernet1 | L2_leaf05_Ethernet4 | *trunk | *none | *- | *- | 1 |
+| Ethernet2 | L2_leaf06_Ethernet4 | *trunk | *none | *- | *- | 1 |
 
 *Inherited from Port-Channel Interface
 
@@ -302,7 +255,7 @@ interface Ethernet2
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel1 | L2_DC1_L3_POD3_Port-Channel4 | trunk | 11-12,21-22,31-32,3401-3402 | - | - | - | - | - | - |
+| Port-Channel1 | L2_DC1_L3_POD3_Port-Channel4 | trunk | none | - | - | - | - | - | - |
 
 #### Port-Channel Interfaces Device Configuration
 
@@ -311,7 +264,7 @@ interface Ethernet2
 interface Port-Channel1
    description L2_DC1_L3_POD3_Port-Channel4
    no shutdown
-   switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
+   switchport trunk allowed vlan none
    switchport mode trunk
    switchport
 ```

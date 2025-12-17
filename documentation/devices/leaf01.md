@@ -442,9 +442,9 @@ interface Port-Channel5
 | --------- | ----------- | --- | ------------ |
 | Loopback0 | ROUTER_ID | default | 2001:db8:1:1::1/64 |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | 2001:db8:5:1::1/64 |
-| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 2602:10:ff:10::1/128 |
+| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 2602:10:ff::1/128 |
 | Loopback11 | DIAG_VRF_VRF11 | VRF11 | 2602:11:ff::1/128 |
-| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 2602:12:ff:12::1/128 |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 2602:12:ff::1/128 |
 
 #### Loopback Interfaces Device Configuration
 
@@ -464,7 +464,7 @@ interface Loopback10
    description DIAG_VRF_VRF10
    no shutdown
    vrf VRF10
-   ipv6 address 2602:10:ff:10::1/128
+   ipv6 address 2602:10:ff::1/128
 !
 interface Loopback11
    description DIAG_VRF_VRF11
@@ -476,7 +476,7 @@ interface Loopback12
    description DIAG_VRF_VRF12
    no shutdown
    vrf VRF12
-   ipv6 address 2602:12:ff:12::1/128
+   ipv6 address 2602:12:ff::1/128
 ```
 
 ### VLAN Interfaces
@@ -1089,15 +1089,15 @@ vrf instance VRF12
 
 | Source NAT VRF | Source NAT IPv4 Address | Source NAT IPv6 Address |
 | -------------- | ----------------------- | ----------------------- |
-| VRF10 | - | 2602:10:ff:10::1 |
+| VRF10 | - | 2602:10:ff::1 |
 | VRF11 | - | 2602:11:ff::1 |
-| VRF12 | - | 2602:12:ff:12::1 |
+| VRF12 | - | 2602:12:ff::1 |
 
 ### Virtual Source NAT Configuration
 
 ```eos
 !
-ipv6 address virtual source-nat vrf VRF10 address 2602:10:ff:10::1
+ipv6 address virtual source-nat vrf VRF10 address 2602:10:ff::1
 ipv6 address virtual source-nat vrf VRF11 address 2602:11:ff::1
-ipv6 address virtual source-nat vrf VRF12 address 2602:12:ff:12::1
+ipv6 address virtual source-nat vrf VRF12 address 2602:12:ff::1
 ```

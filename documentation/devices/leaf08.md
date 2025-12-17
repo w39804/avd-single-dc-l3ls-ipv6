@@ -342,7 +342,7 @@ vlan 4094
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet4 | L2_host04_Ethernet2 | *trunk | *11-12,21-22,31-32,3401-3402 | *- | *- | 4 |
+| Ethernet4 | L2_host04_Ethernet2 | *trunk | *none | *- | *- | 4 |
 | Ethernet5 | MLAG_leaf07_Ethernet5 | *trunk | *- | *- | *MLAG | 5 |
 | Ethernet6 | MLAG_leaf07_Ethernet6 | *trunk | *- | *- | *MLAG | 5 |
 
@@ -397,7 +397,7 @@ interface Ethernet6
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel4 | L2_host04_Port-Channel1 | trunk | 11-12,21-22,31-32,3401-3402 | - | - | - | - | 4 | - |
+| Port-Channel4 | L2_host04_Port-Channel1 | trunk | none | - | - | - | - | 4 | - |
 | Port-Channel5 | MLAG_leaf07_Port-Channel5 | trunk | - | - | MLAG | - | - | - | - |
 
 #### Port-Channel Interfaces Device Configuration
@@ -407,7 +407,7 @@ interface Ethernet6
 interface Port-Channel4
    description L2_host04_Port-Channel1
    no shutdown
-   switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
+   switchport trunk allowed vlan none
    switchport mode trunk
    switchport
    mlag 4
@@ -440,9 +440,9 @@ interface Port-Channel5
 | --------- | ----------- | --- | ------------ |
 | Loopback0 | ROUTER_ID | default | 2001:db8:1:8::1/64 |
 | Loopback1 | VXLAN_TUNNEL_SOURCE | default | 2001:db8:5:7::1/64 |
-| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 2602:10:ff:10::8/128 |
+| Loopback10 | DIAG_VRF_VRF10 | VRF10 | 2602:10:ff::8/128 |
 | Loopback11 | DIAG_VRF_VRF11 | VRF11 | 2602:11:ff::8/128 |
-| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 2602:12:ff:12::8/128 |
+| Loopback12 | DIAG_VRF_VRF12 | VRF12 | 2602:12:ff::8/128 |
 
 #### Loopback Interfaces Device Configuration
 
@@ -462,7 +462,7 @@ interface Loopback10
    description DIAG_VRF_VRF10
    no shutdown
    vrf VRF10
-   ipv6 address 2602:10:ff:10::8/128
+   ipv6 address 2602:10:ff::8/128
 !
 interface Loopback11
    description DIAG_VRF_VRF11
@@ -474,7 +474,7 @@ interface Loopback12
    description DIAG_VRF_VRF12
    no shutdown
    vrf VRF12
-   ipv6 address 2602:12:ff:12::8/128
+   ipv6 address 2602:12:ff::8/128
 ```
 
 ### VLAN Interfaces
@@ -1087,15 +1087,15 @@ vrf instance VRF12
 
 | Source NAT VRF | Source NAT IPv4 Address | Source NAT IPv6 Address |
 | -------------- | ----------------------- | ----------------------- |
-| VRF10 | - | 2602:10:ff:10::8 |
+| VRF10 | - | 2602:10:ff::8 |
 | VRF11 | - | 2602:11:ff::8 |
-| VRF12 | - | 2602:12:ff:12::8 |
+| VRF12 | - | 2602:12:ff::8 |
 
 ### Virtual Source NAT Configuration
 
 ```eos
 !
-ipv6 address virtual source-nat vrf VRF10 address 2602:10:ff:10::8
+ipv6 address virtual source-nat vrf VRF10 address 2602:10:ff::8
 ipv6 address virtual source-nat vrf VRF11 address 2602:11:ff::8
-ipv6 address virtual source-nat vrf VRF12 address 2602:12:ff:12::8
+ipv6 address virtual source-nat vrf VRF12 address 2602:12:ff::8
 ```

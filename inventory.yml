@@ -29,7 +29,7 @@ all:
                   ansible_host: 3fff:172:20:20::107
                 leaf08:
                   ansible_host: 3fff:172:20:20::108
-            TENANT_HOSTS:
+            DC1_TENANT_HOSTS:
               hosts:
                 host01:
                   ansible_host: 3fff:172:20:20::111

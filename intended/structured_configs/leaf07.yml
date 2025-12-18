@@ -169,7 +169,7 @@ port_channel_interfaces:
     enabled: true
     mode: trunk
     trunk:
-      allowed_vlan: 11-12,21-22
+      allowed_vlan: 11-12,21-22,31-32
       native_vlan: 4092
 route_maps:
 - name: RM-MLAG-PEER-IN

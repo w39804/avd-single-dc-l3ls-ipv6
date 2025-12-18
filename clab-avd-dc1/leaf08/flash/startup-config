@@ -1,4 +1,4 @@
-! Startup-config last modified at Wed Dec 17 14:13:12 2025 by ansible
+! Startup-config last modified at Thu Dec 18 16:24:29 2025 by ansible
 ! device: leaf08 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root
@@ -89,7 +89,7 @@ vrf instance VRF12
 !
 interface Port-Channel4
    description L2_host04_Port-Channel1
-   switchport trunk allowed vlan none
+   switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
    switchport mode trunk
    mlag 4
 !

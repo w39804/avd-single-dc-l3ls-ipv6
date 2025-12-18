@@ -8,3 +8,4 @@ vlan_interfaces:
     shutdown: False
     vrf: default
     ipv6_address: "2001:db8:21::201/48"
+

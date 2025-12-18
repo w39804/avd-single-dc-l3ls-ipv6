@@ -342,7 +342,7 @@ vlan 4094
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet4 | L2_host04_Ethernet2 | *trunk | *none | *- | *- | 4 |
+| Ethernet4 | L2_host04_Ethernet2 | *trunk | *11-12,21-22,31-32,3401-3402 | *- | *- | 4 |
 | Ethernet5 | MLAG_leaf07_Ethernet5 | *trunk | *- | *- | *MLAG | 5 |
 | Ethernet6 | MLAG_leaf07_Ethernet6 | *trunk | *- | *- | *MLAG | 5 |
 
@@ -397,7 +397,7 @@ interface Ethernet6
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel4 | L2_host04_Port-Channel1 | trunk | none | - | - | - | - | 4 | - |
+| Port-Channel4 | L2_host04_Port-Channel1 | trunk | 11-12,21-22,31-32,3401-3402 | - | - | - | - | 4 | - |
 | Port-Channel5 | MLAG_leaf07_Port-Channel5 | trunk | - | - | MLAG | - | - | - | - |
 
 #### Port-Channel Interfaces Device Configuration
@@ -407,7 +407,7 @@ interface Ethernet6
 interface Port-Channel4
    description L2_host04_Port-Channel1
    no shutdown
-   switchport trunk allowed vlan none
+   switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
    switchport mode trunk
    switchport
    mlag 4

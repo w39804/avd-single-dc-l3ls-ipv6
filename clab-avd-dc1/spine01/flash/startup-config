@@ -1,4 +1,4 @@
-! Startup-config last modified at Wed Dec 17 10:25:38 2025 by ansible
+! Startup-config last modified at Thu Dec 18 15:13:20 2025 by ansible
 ! device: spine01 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root

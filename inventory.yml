@@ -43,9 +43,9 @@ all:
     NETWORK_SERVICES:
       children:
         DC1_L3_LEAVES:
-        TENANT_HOSTS:
+        DC1_TENANT_HOSTS:
 
     CONNECTED_ENDPOINTS:
       children:
         DC1_L3_LEAVES:
-        TENANT_HOSTS:
+        DC1_TENANT_HOSTS:

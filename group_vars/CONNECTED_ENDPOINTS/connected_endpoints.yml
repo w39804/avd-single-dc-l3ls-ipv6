@@ -12,7 +12,7 @@ servers:
         # Device names where the server ports are connected.
         switches: [leaf01, leaf02]
         # VLANs that will be configured on these ports.
-        vlans: 11-12,21-22
+        vlans: 11-12,21-22,31-32
         # Native VLAN to be used on these ports.
         native_vlan: 4092
         # L2 mode of the port.
@@ -31,7 +31,7 @@ servers:
       - endpoint_ports: [Ethernet1, Ethernet2]
         switch_ports: [Ethernet4, Ethernet4]
         switches: [leaf03, leaf04]
-        vlans: 11-12,21-22
+        vlans: 11-12,21-22,31-32
         native_vlan: 4092
         mode: trunk
         spanning_tree_portfast: edge
@@ -43,7 +43,7 @@ servers:
       - endpoint_ports: [Ethernet1, Ethernet2]
         switch_ports: [Ethernet4, Ethernet4]
         switches: [leaf05, leaf06]
-        vlans: 11-12,21-22
+        vlans: 11-12,21-22,31-32
         native_vlan: 4092
         mode: trunk
         spanning_tree_portfast: edge
@@ -55,7 +55,7 @@ servers:
       - endpoint_ports: [Ethernet1, Ethernet2]
         switch_ports: [Ethernet4, Ethernet4]
         switches: [leaf07, leaf09]
-        vlans: 11-12,21-22
+        vlans: 11-12,21-22,31-32
         native_vlan: 4092
         mode: trunk
         spanning_tree_portfast: edge

@@ -1,4 +1,4 @@
-! Startup-config last modified at Thu Dec 18 16:24:30 2025 by ansible
+! Startup-config last modified at Mon Dec 22 10:54:44 2025 by ansible
 ! device: host04 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root
@@ -59,6 +59,12 @@ vlan 3402
 !
 vrf instance MGMT
 !
+vrf instance VRF10
+!
+vrf instance VRF11
+!
+vrf instance VRF12
+!
 interface Port-Channel1
    description L2_DC1_L3_POD4_Port-Channel4
    switchport trunk allowed vlan 11-12,21-22,31-32,3401-3402
@@ -73,19 +79,34 @@ interface Ethernet2
    channel-group 1 mode active
 !
 interface Management0
-   description OOB_MANAGEMENT
+   description oob_management
    vrf MGMT
-   ipv6 enable
-   ipv6 address 3fff:172:20:20::114/64
+   ipv6 address 3fff:172:20:20::114/24
+!
+interface Vlan11
+   description vrf-irb-vlan11
+   vrf VRF10
+   ipv6 address 2602:10:ff:11::204/64
 !
 interface Vlan21
    description vrf-irb-vlan21
+   vrf VRF11
    ipv6 address 2001:db8:21::204/48
 !
-ip routing
+no ip routing
 no ip routing vrf MGMT
+no ip routing vrf VRF10
+no ip routing vrf VRF11
+no ip routing vrf VRF12
+!
+ipv6 unicast-routing vrf MGMT
+ipv6 unicast-routing vrf VRF10
+ipv6 unicast-routing vrf VRF11
+ipv6 unicast-routing vrf VRF12
 !
 ipv6 route vrf MGMT ::/0 3fff:172:20:20::1
+ipv6 route vrf VRF10 ::/0 2602:10:ff:11::1
+ipv6 route vrf VRF11 ::/0 2001:db8:21::1
 !
 ntp local-interface vrf MGMT Management0
 ntp server vrf MGMT 0.pool.ntp.org prefer

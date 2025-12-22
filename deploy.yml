@@ -1,8 +1,17 @@
 ---
 # deploy.yml
 
-- name: Deploy Configurations to Devices using eAPI
+- name: Deploy Configurations to FABRIC Devices using eAPI
   hosts: FABRIC # (1)!
+  gather_facts: false
+  tasks:
+
+    - name: Deploy Configurations to Devices # (2)!
+      ansible.builtin.import_role:
+        name: arista.avd.eos_config_deploy_eapi
+
+- name: Deploy Configurations to DC1_TENANT_HOSTS Devices using eAPI
+  hosts: DC1_TENANT_HOSTS # (1)!
   gather_facts: false
   tasks:
 

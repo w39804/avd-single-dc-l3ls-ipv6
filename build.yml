@@ -1,7 +1,7 @@
 ---
 # build.yml
 
-- name: Build Configurations and Documentation
+- name: Build FABRIC Configurations and Documentation
   hosts: FABRIC # (1)!
   gather_facts: false
   tasks:
@@ -9,6 +9,20 @@
     - name: Generate AVD Structured Configurations and Fabric Documentation # (2)!
       ansible.builtin.import_role:
         name: arista.avd.eos_designs
+
+    - name: Generate Device Configurations and Documentation # (3)!
+      ansible.builtin.import_role:
+        name: arista.avd.eos_cli_config_gen
+
+
+- name: Build DC1_TENANT_HOSTS Configurations and Documentation
+  hosts: DC1_TENANT_HOSTS # (1)!
+  gather_facts: false
+  tasks:
+
+    # - name: Generate AVD Structured Configurations and Fabric Documentation # (2)!
+    #   ansible.builtin.import_role:
+    #     name: arista.avd.eos_designs
 
     - name: Generate Device Configurations and Documentation # (3)!
       ansible.builtin.import_role:

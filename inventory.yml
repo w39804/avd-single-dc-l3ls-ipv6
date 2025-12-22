@@ -29,23 +29,23 @@ all:
                   ansible_host: 3fff:172:20:20::107
                 leaf08:
                   ansible_host: 3fff:172:20:20::108
-            DC1_TENANT_HOSTS:
-              hosts:
-                host01:
-                  ansible_host: 3fff:172:20:20::111
-                host02:
-                  ansible_host: 3fff:172:20:20::112
-                host03:
-                  ansible_host: 3fff:172:20:20::113
-                host04:
-                  ansible_host: 3fff:172:20:20::114            
+    DC1_TENANT_HOSTS:
+      hosts:
+        host01:
+          ansible_host: 3fff:172:20:20::111
+        host02:
+          ansible_host: 3fff:172:20:20::112
+        host03:
+          ansible_host: 3fff:172:20:20::113
+        host04:
+          ansible_host: 3fff:172:20:20::114            
 
     NETWORK_SERVICES:
       children:
         DC1_L3_LEAVES:
-        DC1_TENANT_HOSTS:
+#        DC1_TENANT_HOSTS:
 
     CONNECTED_ENDPOINTS:
       children:
         DC1_L3_LEAVES:
-        DC1_TENANT_HOSTS:
+#        DC1_TENANT_HOSTS:

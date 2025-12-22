@@ -32,18 +32,18 @@ all:
                 leaf06:
                 leaf07:
                 leaf08:
-            DC1_TENANT_HOSTS:
-              hosts:
-                host01:
-                host02:
-                host03:
-                host04:
+    DC1_TENANT_HOSTS:
+      hosts:
+        host01:
+        host02:
+        host03:
+        host04:
 
     NETWORK_SERVICES: # (2)!
       children::
         DC1_L3_LEAVES:
-        DC1_TENANT_HOSTS:
+#        DC1_TENANT_HOSTS:
     CONNECTED_ENDPOINTS: # (3)!
       children:
         DC1_L3_LEAVES:
-        DC1_TENANT_HOSTS:
+#        DC1_TENANT_HOSTS:

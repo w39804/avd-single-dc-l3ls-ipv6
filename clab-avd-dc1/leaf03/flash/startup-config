@@ -1,4 +1,4 @@
-! Startup-config last modified at Thu Dec 18 16:24:27 2025 by ansible
+! Startup-config last modified at Mon Dec 22 10:31:34 2025 by ansible
 ! device: leaf03 (cEOSLab, EOS-4.34.2F-43237028.4342F (engineering build))
 !
 no aaa root

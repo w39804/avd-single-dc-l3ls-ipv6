@@ -1,3 +1,33 @@
+---
+# Ansible connectivity definitions
+# eAPI connectivity via HTTPS is specified (as opposed to CLI via SSH)
+ansible_connection: ansible.netcommon.httpapi
+#ansible_connection: ansible.netcommon.network_cli
+# Specifies that we are indeed using Arista EOS
+ansible_network_os: arista.eos.eos
+# This user/password must exist on the switches to enable Ansible access
+ansible_user: ansible
+ansible_password: ansible
+# User escalation (to enter enable mode)
+ansible_become: true
+ansible_become_method: enable
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+
+service_routing_protocols_model: multi-agent
+ip_routing: false
+ipv6_routing: true
+
+hostname: "{{ inventory_hostname }}"
+
+management_interfaces:
+  - name: Management0
+    description: oob_management
+    shutdown: false
+    vrf: "MGMT"
+    ipv6_address: "{{ ansible_host }}/24"
+    type: oob
+
 aaa_root:
   disabled: true
 config_end: true
@@ -13,39 +43,18 @@ daemon_terminattr:
   smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
 enable_password:
   disabled: true
-ethernet_interfaces:
-- name: Ethernet1
-  description: L2_leaf07_Ethernet4
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-  peer: leaf07
-  peer_interface: Ethernet4
-  peer_type: l3leaf
-- name: Ethernet2
-  description: L2_leaf08_Ethernet4
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-  peer: leaf08
-  peer_interface: Ethernet4
-  peer_type: l3leaf
-hostname: host04
+
 ip_domain_lookup:
   source_interfaces:
   - name: Management0
     vrf: MGMT
 ip_igmp_snooping:
   globally_enabled: true
+
 ip_name_servers:
 - ip_address: 192.168.1.1
   vrf: MGMT
-ipv6_static_routes:
-- vrf: MGMT
-  prefix: ::/0
-  next_hop: 3fff:172:20:20::1
+
 local_users:
 - name: ansible
   privilege: 15
@@ -55,15 +64,6 @@ management_api_http:
   enable_https: true
   enable_vrfs:
   - name: MGMT
-management_interfaces:
-- name: Management0
-  description: OOB_MANAGEMENT
-  shutdown: false
-  vrf: MGMT
-  ipv6_enable: true
-  ipv6_address: 3fff:172:20:20::114/64
-  type: oob
-  ipv6_gateway: 3fff:172:20:20::1
 metadata:
   is_deployed: true
   platform: cEOSLab
@@ -76,27 +76,21 @@ ntp:
   - name: 0.pool.ntp.org
     preferred: true
     vrf: MGMT
-port_channel_interfaces:
-- name: Port-Channel1
-  description: L2_DC1_L3_POD4_Port-Channel4
-  shutdown: false
-  switchport:
-    enabled: true
-    mode: trunk
-    trunk:
-      allowed_vlan: 11-12,21-22,31-32,3401-3402
-service_routing_protocols_model: multi-agent
+
 spanning_tree:
   mode: mstp
   mst_instances:
   - id: '0'
     priority: 32768
+
 transceiver_qsfp_default_mode_4x10: true
+
 vlan_internal_order:
   allocation: ascending
   range:
     beginning: 1006
     ending: 1199
+
 vlans:
 - id: 11
   name: VRF10_VLAN11
@@ -122,7 +116,15 @@ vlans:
 - id: 3402
   name: L2_VLAN3402
   tenant: TENANT1
+
 vrfs:
-- name: MGMT
-  ip_routing: false
-  ipv6_routing: false
+  - name: default
+    ipv6_routing: true
+  - name: "MGMT"
+    ipv6_routing: true
+  - name: "VRF10"
+    ipv6_routing: true
+  - name: "VRF11"
+    ipv6_routing: true
+  - name: "VRF12"
+    ipv6_routing: true

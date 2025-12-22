@@ -47,24 +47,23 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
+| Management0 | oob_management | oob | MGMT | - | - |
 
 ##### IPv6
 
 | Management Interface | Description | Type | VRF | IPv6 Address | IPv6 Gateway |
 | -------------------- | ----------- | ---- | --- | ------------ | ------------ |
-| Management0 | OOB_MANAGEMENT | oob | MGMT | 3fff:172:20:20::111/64 | 3fff:172:20:20::1 |
+| Management0 | oob_management | oob | MGMT | 3fff:172:20:20::111/24 | - |
 
 #### Management Interfaces Device Configuration
 
 ```eos
 !
 interface Management0
-   description OOB_MANAGEMENT
+   description oob_management
    no shutdown
    vrf MGMT
-   ipv6 enable
-   ipv6 address 3fff:172:20:20::111/64
+   ipv6 address 3fff:172:20:20::111/24
 ```
 
 ### IP Name Servers
@@ -322,28 +321,37 @@ interface Port-Channel1
 
 | Interface | Description | VRF |  MTU | Shutdown |
 | --------- | ----------- | --- | ---- | -------- |
-| Vlan21 | vrf-irb-vlan21 | default | - | False |
+| Vlan11 | vrf-irb-vlan11 | VRF10 | - | False |
+| Vlan21 | vrf-irb-vlan21 | VRF11 | - | False |
 
 ##### IPv4
 
 | Interface | VRF | IP Address | IP Address Virtual | IP Router Virtual Address | ACL In | ACL Out |
 | --------- | --- | ---------- | ------------------ | ------------------------- | ------ | ------- |
-| Vlan21 |  default  |  -  |  -  |  -  |  -  |  -  |
+| Vlan11 |  VRF10  |  -  |  -  |  -  |  -  |  -  |
+| Vlan21 |  VRF11  |  -  |  -  |  -  |  -  |  -  |
 
 ##### IPv6
 
 | Interface | VRF | IPv6 Address | IPv6 Virtual Addresses | Virtual Router Addresses | ND RA Disabled | Managed Config Flag | Other Config Flag | IPv6 ACL In | IPv6 ACL Out |
 | --------- | --- | ------------ | ---------------------- | ------------------------ | -------------- | ------------------- | ----------------- | ----------- | ------------ |
-| Vlan21 | default | 2001:db8:21::201/48 | - | - | - | - | - | - | - |
+| Vlan11 | VRF10 | 2602:0010:FF:11::201/64 | - | - | - | - | - | - | - |
+| Vlan21 | VRF11 | 2001:db8:21::201/48 | - | - | - | - | - | - | - |
 
 #### VLAN Interfaces Device Configuration
 
 ```eos
 !
+interface Vlan11
+   description vrf-irb-vlan11
+   no shutdown
+   vrf VRF10
+   ipv6 address 2602:0010:FF:11::201/64
+!
 interface Vlan21
    description vrf-irb-vlan21
    no shutdown
-   vrf default
+   vrf VRF11
    ipv6 address 2001:db8:21::201/48
 ```
 
@@ -364,15 +372,17 @@ service routing protocols model multi-agent
 
 | VRF | Routing Enabled |
 | --- | --------------- |
-| default | True |
-| MGMT | False |
+| default | False |
+| MGMT | - |
+| VRF10 | - |
+| VRF11 | - |
+| VRF12 | - |
 
 #### IP Routing Device Configuration
 
 ```eos
 !
-ip routing
-no ip routing vrf MGMT
+no ip routing
 ```
 
 ### IPv6 Routing
@@ -382,7 +392,11 @@ no ip routing vrf MGMT
 | VRF | Routing Enabled |
 | --- | --------------- |
 | default | False |
-| MGMT | false |
+| default | true |
+| MGMT | true |
+| VRF10 | true |
+| VRF11 | true |
+| VRF12 | true |
 
 ### IPv6 Static Routes
 
@@ -391,12 +405,16 @@ no ip routing vrf MGMT
 | VRF | Destination Prefix | Next Hop IP             | Exit interface      | Administrative Distance       | Tag               | Route Name                    | Metric         |
 | --- | ------------------ | ----------------------- | ------------------- | ----------------------------- | ----------------- | ----------------------------- | -------------- |
 | MGMT | ::/0 | 3fff:172:20:20::1 | - | 1 | - | - | - |
+| VRF10 | ::/0 | 2602:0010:FF:11::1 | - | 1 | - | - | - |
+| VRF11 | ::/0 | 2001:db8:21::1 | - | 1 | - | - | - |
 
 #### Static Routes Device Configuration
 
 ```eos
 !
 ipv6 route vrf MGMT ::/0 3fff:172:20:20::1
+ipv6 route vrf VRF10 ::/0 2602:0010:FF:11::1
+ipv6 route vrf VRF11 ::/0 2001:db8:21::1
 ```
 
 ## Multicast
@@ -421,10 +439,19 @@ ipv6 route vrf MGMT ::/0 3fff:172:20:20::1
 | VRF Name | IP Routing |
 | -------- | ---------- |
 | MGMT | disabled |
+| VRF10 | disabled |
+| VRF11 | disabled |
+| VRF12 | disabled |
 
 ### VRF Instances Device Configuration
 
 ```eos
 !
 vrf instance MGMT
+!
+vrf instance VRF10
+!
+vrf instance VRF11
+!
+vrf instance VRF12
 ```
